@@ -56,7 +56,6 @@ class AudioConverter:
                             print("No se pudo entender el audio. Intentando de nuevo...")
                     except Exception as e:
                         print(f"Error: {str(e)}. Intentando de nuevo...")
-
             else:
                 print("No se pudo convertir el archivo a WAV.")
         else:

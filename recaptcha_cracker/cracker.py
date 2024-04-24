@@ -21,6 +21,7 @@ class RecaptchaCracker:
 
     self.driver.click('#recaptcha-audio-button')
     self._solve_audio_captcha()
+    self.driver.switch_to.default_content()
 
   def _solve_audio_captcha(self):
     while True:
@@ -29,8 +30,7 @@ class RecaptchaCracker:
         converter = AudioConverter(url)
         recognized_text = converter.process()
         self.driver.press_keys('#audio-response', f'{recognized_text}\n')
-        e = self.driver.wait_for_element('.rc-audiochallenge-error-message')
-        if e:
+        if self.driver.is_element_visible('.rc-audiochallenge-error-message'):
           print("Error detectado, intentando de nuevo...")
         else:
           break

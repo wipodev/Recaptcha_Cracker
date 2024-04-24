@@ -12,6 +12,8 @@ setup(
     long_description=open('README.md', 'r').read(),
     long_description_content_type='text/markdown',
     install_requires=[
-        'seleniumbase'
+        'seleniumbase',
+        'pydub',
+        'SpeechRecognition',
     ],
 )

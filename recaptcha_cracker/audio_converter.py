@@ -50,12 +50,12 @@ class AudioConverter:
                     try:
                         recognized_text = self.recognize_speech(output_file)
                         if recognized_text:
-                            print("Texto reconocido:")
-                            print(recognized_text)
+                            print(f"Texto reconocido: {recognized_text}")
                         else:
                             print("No se pudo entender el audio. Intentando de nuevo...")
                     except Exception as e:
                         print(f"Error: {str(e)}. Intentando de nuevo...")
+                return recognized_text
             else:
                 print("No se pudo convertir el archivo a WAV.")
         else:

@@ -1,6 +1,7 @@
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from seleniumbase import Driver
 from recaptcha_cracker.audio_converter import AudioConverter
+import time
 
 class RecaptchaCracker:
   def __init__(self, driver: Driver, attempts: int = 3):
@@ -55,6 +56,7 @@ class RecaptchaCracker:
 
   def _check_recaptcha(self):
     try:
+      time.sleep(1)
       return self._get_attribute('#recaptcha-anchor', 'aria-checked') == 'true'
     except (TimeoutException, NoSuchElementException) as e:
       print(f"Error al chequear el captcha: {e}")

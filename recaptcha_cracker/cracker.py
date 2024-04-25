@@ -12,7 +12,7 @@ class RecaptchaCracker:
     self.driver.click('#recaptcha-anchor-label')
 
     if self._get_attribute('#recaptcha-anchor', 'aria-checked') == 'true':
-      self.driver.switch_to.default_content()
+      self.driver.switch_to.parent_frame()
       return
     
     self.driver.switch_to.parent_frame()
@@ -21,7 +21,12 @@ class RecaptchaCracker:
 
     self.driver.click('#recaptcha-audio-button')
     self._solve_audio_captcha()
-    self.driver.switch_to.default_content()
+
+    self.driver.switch_to.parent_frame()
+    self.driver.switch_to.frame(iframe_captcha)
+    if self._get_attribute('#recaptcha-anchor', 'aria-checked') == 'true':
+      self.driver.switch_to.parent_frame()
+      return
 
   def _solve_audio_captcha(self):
     while True:

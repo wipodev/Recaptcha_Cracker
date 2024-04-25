@@ -3,7 +3,7 @@ from pydub import AudioSegment
 from io import BytesIO
 import speech_recognition as sr
 
-class AudioConverter:
+class AudioManager:
     def __init__(self, url):
         self.url = url
 
@@ -37,7 +37,7 @@ class AudioConverter:
             except sr.RequestError:
                 return None
 
-    def process(self, output_file="output.wav"):
+    def get_audio_transcript(self, output_file="output.wav"):
         audio_bytes = self.download_audio()
         if audio_bytes:
             wav_audio = self.convert_to_wav(audio_bytes)
@@ -65,5 +65,4 @@ class AudioConverter:
 if __name__ == "__main__":
     url = "URL_DEL_AUDIO_AQUÍ"
 
-    converter = AudioConverter(url)
-    converter.process()
+    print(AudioManager(url).get_audio_transcript())

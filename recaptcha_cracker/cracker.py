@@ -1,6 +1,6 @@
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from seleniumbase import Driver
-from recaptcha_cracker.audio_converter import AudioConverter
+from recaptcha_cracker.audio_manager import AudioManager
 import time
 
 class RecaptchaCracker:
@@ -41,8 +41,7 @@ class RecaptchaCracker:
         url = self._get_attribute('.rc-audiochallenge-tdownload-link', 'href')
         if url == '':
           return False
-        converter = AudioConverter(url)
-        recognized_text = converter.process()
+        recognized_text = AudioManager(url).get_audio_transcript()
         self.driver.press_keys('#audio-response', f'{recognized_text}\n')
         if self.driver.is_element_visible('.rc-audiochallenge-error-message'):
           print("Error detectado, intentando de nuevo...")

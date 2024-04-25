@@ -1,2 +1,2 @@
 from .cracker import RecaptchaCracker
-from .audio_converter import AudioConverter
+from .audio_manager import AudioManager

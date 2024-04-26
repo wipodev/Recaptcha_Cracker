@@ -25,8 +25,8 @@ setup(
     keywords='python, captcha, speech recognition, selenium, web automation',
     packages=find_packages(exclude=('tests*', 'testing*', 'test*')),
     install_requires=[
-        'seleniumbase=4.25.4',
-        'pydub=0.25.1',
-        'SpeechRecognition=3.10.3',
+        'seleniumbase~=4.25.4',
+        'pydub~=0.25.1',
+        'SpeechRecognition~=3.10.3',
     ],
 )

@@ -2,6 +2,7 @@ import requests
 from pydub import AudioSegment
 from io import BytesIO
 import speech_recognition as sr
+from verbose_terminal import console
 
 class AudioManager:
     def __init__(self, url):
@@ -37,32 +38,26 @@ class AudioManager:
             except sr.RequestError:
                 return None
 
-    def get_audio_transcript(self, output_file="output.wav"):
+    def get_audio_transcript(self, output_file="output.wav", verbose: bool = True):
         audio_bytes = self.download_audio()
         if audio_bytes:
             wav_audio = self.convert_to_wav(audio_bytes)
             if wav_audio:
                 self.save_audio(wav_audio, output_file)
-                print(f"Archivo WAV guardado: {output_file}")
+                console.info(f"Saved WAV file: {output_file}", verbose)
 
                 recognized_text = None
-                while not recognized_text:
-                    try:
-                        recognized_text = self.recognize_speech(output_file)
-                        if recognized_text:
-                            print(f"Texto reconocido: {recognized_text}")
-                        else:
-                            print("No se pudo entender el audio. Intentando de nuevo...")
-                    except Exception as e:
-                        print(f"Error: {str(e)}. Intentando de nuevo...")
-                return recognized_text
+                try:
+                    recognized_text = self.recognize_speech(output_file)
+                    if recognized_text:
+                        console.success(f"Recognized text: {recognized_text}", verbose)
+                    else:
+                        console.error("Could not understand the audio.")
+                except Exception as e:
+                    console.critical(f"Error: {str(e)}.")
+                finally:
+                    return recognized_text
             else:
-                print("No se pudo convertir el archivo a WAV.")
+                console.error("Could not convert file to WAV.")
         else:
-            print("Error al descargar el archivo de audio.")
-
-# Ejemplo de uso
-if __name__ == "__main__":
-    url = "URL_DEL_AUDIO_AQUÍ"
-
-    print(AudioManager(url).get_audio_transcript())
+            console.error("Error downloading the audio file.")

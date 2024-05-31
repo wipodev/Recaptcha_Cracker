@@ -1,4 +1,4 @@
-setuptools==65.5.0
+setuptools==65.5.1
 twine==5.1.0
 wheel==0.43.0
 pytest==8.2.1

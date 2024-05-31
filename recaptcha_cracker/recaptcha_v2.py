@@ -1,14 +1,15 @@
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from seleniumbase import Driver
-from recaptcha_cracker.audio_manager import AudioManager
+from .utils import AudioManager
 import time
+from verbose_terminal import console
 
-class RecaptchaCracker:
+class RecaptchaV2:
   def __init__(self, driver: Driver, attempts: int = 3):
     self.driver = driver
     self.attempts = attempts
 
-  def click_recaptcha(self, selector: str):
+  def cracker(self, selector: str):
     try:
       iframe_captcha = self.driver.wait_for_element('xpath', selector)
       self.driver.switch_to.frame(iframe_captcha)
@@ -20,7 +21,7 @@ class RecaptchaCracker:
       self.driver.switch_to.frame(iframe_captcha)
       return self._check_recaptcha()
     except (TimeoutException, NoSuchElementException) as e:
-      print(f"Error al resolver el captcha: {e}")
+      console.error(f"Error solving captcha: {e}")
       return False
 
   def _handle_audio_recaptcha(self):
@@ -30,7 +31,7 @@ class RecaptchaCracker:
             self.driver.click('#recaptcha-audio-button')
             return self._solve_audio_recaptcha()
         except (TimeoutException, NoSuchElementException) as e:
-            print(f"Error al manejar el captcha de audio: {e}")
+            console.error(f"Error when handling the audio captcha: {e}")
             return False
         finally:
             self.driver.switch_to.parent_frame()
@@ -39,18 +40,18 @@ class RecaptchaCracker:
     for _ in range(self.attempts):
       try:
         url = self._get_attribute('.rc-audiochallenge-tdownload-link', 'href')
-        if url == '':
+        if url is None:
           return False
         recognized_text = AudioManager(url).get_audio_transcript()
         self.driver.press_keys('#audio-response', f'{recognized_text}\n')
         if self.driver.is_element_visible('.rc-audiochallenge-error-message'):
-          print("Error detectado, intentando de nuevo...")
+          console.error("Error detected, trying again...")
         else:
           return True
       except Exception as e:
-        print(f"Error al resolver el captcha de audio: {e}")
+        console.error(f"Error solving audio captcha: {e}")
         return False
-    print(f"No se pudo resolver el captcha de audio después de {self.attempts} intentos.")
+    console.error(f"Could not resolve audio captcha after {self.attempts} attempts.")
     return False
 
   def _check_recaptcha(self):
@@ -58,7 +59,7 @@ class RecaptchaCracker:
       time.sleep(1)
       return self._get_attribute('#recaptcha-anchor', 'aria-checked') == 'true'
     except (TimeoutException, NoSuchElementException) as e:
-      print(f"Error al chequear el captcha: {e}")
+      console.error(f"Error checking the captcha: {e}")
       return False
     finally:
       self.driver.switch_to.parent_frame()
@@ -70,5 +71,5 @@ class RecaptchaCracker:
       else:
         return self.driver.wait_for_element(type, selector).get_attribute(attribute)
     except (TimeoutException, NoSuchElementException) as e:
-      print(f"Error al obtener el atributo: {e}")
-      return ""
+      console.error(f"Error getting attribute: {e}")
+      return None

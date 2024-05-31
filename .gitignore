@@ -4,5 +4,10 @@ build
 dist
 __pycache__
 *.egg-info
-*.wav
 downloaded_files/
+*.wav
+*.mp3
+*.jpg
+*.jpeg
+*.png
+*.svg

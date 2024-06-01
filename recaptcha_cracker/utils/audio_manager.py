@@ -5,8 +5,9 @@ import speech_recognition as sr
 from verbose_terminal import console
 
 class AudioManager:
-    def __init__(self, url):
+    def __init__(self, url, verbose: bool = True):
         self.url = url
+        self.verbose = verbose
 
     def download_audio(self):
         response = requests.get(self.url)
@@ -38,19 +39,19 @@ class AudioManager:
             except sr.RequestError:
                 return None
 
-    def get_audio_transcript(self, output_file="output.wav", verbose: bool = True):
+    def get_audio_transcript(self, output_file="output.wav"):
         audio_bytes = self.download_audio()
         if audio_bytes:
             wav_audio = self.convert_to_wav(audio_bytes)
             if wav_audio:
                 self.save_audio(wav_audio, output_file)
-                console.info(f"Saved WAV file: {output_file}", verbose)
+                console.info(f"Saved WAV file: {output_file}", self.verbose)
 
                 recognized_text = None
                 try:
                     recognized_text = self.recognize_speech(output_file)
                     if recognized_text:
-                        console.success(f"Recognized text: {recognized_text}", verbose)
+                        console.success(f"Recognized text: {recognized_text}", self.verbose)
                     else:
                         console.error("Could not understand the audio.")
                 except Exception as e:

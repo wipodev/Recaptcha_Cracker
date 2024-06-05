@@ -1,9 +1,8 @@
 from setuptools import setup, find_packages
 
-
 setup(
     name='recaptcha-cracker',
-    version='0.1.0',
+    version='0.2.0',
     author='Wipodev',
     author_email='ajwipo@gmail.com',
     description='captcha_cracker - A complete Python package for solving various types of CAPTCHAs, including text CAPTCHAs, reCAPTCHAs, and more. Enhance your automation scripts with robust CAPTCHA resolution capabilities.',
@@ -28,6 +27,7 @@ setup(
         'seleniumbase~=4.25.4',
         'pydub~=0.25.1',
         'SpeechRecognition~=3.10.3',
-        'verbose-terminal~=1.0.1'
+        'verbose-terminal~=1.0.1',
+        'easyocr~=1.7.1',
     ],
 )

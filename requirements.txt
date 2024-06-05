@@ -2,3 +2,4 @@ seleniumbase==4.27.0
 pydub==0.25.1
 SpeechRecognition==3.10.4
 verbose-terminal==1.0.1
+easyocr==1.7.1

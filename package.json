@@ -1,0 +1,27 @@
+{
+  "name": "recaptcha_cracker",
+  "version": "0.2.0",
+  "description": "captcha_cracker - A complete Python package for solving various types of CAPTCHAs, including text CAPTCHAs, reCAPTCHAs, and more. Enhance your automation scripts with robust CAPTCHA resolution capabilities.",
+  "scripts": {
+    "dev": "vitepress dev docs --host",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs",
+    "deploy": "gh-pages -d docs/.vitepress/dist"
+  },
+  "keywords": [
+    "python",
+    "captcha",
+    "speech recognition",
+    "selenium",
+    "web automation",
+    "recaptcha"
+  ],
+  "author": "wipodev",
+  "license": "MIT",
+  "dependencies": {
+    "gh-pages": "^6.1.1"
+  },
+  "devDependencies": {
+    "vitepress": "^1.2.3"
+  }
+}

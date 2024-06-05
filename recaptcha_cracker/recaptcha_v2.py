@@ -55,14 +55,15 @@ class RecaptchaV2:
     return False
 
   def _check_recaptcha(self):
-    try:
-      time.sleep(1)
-      return self._get_attribute('#recaptcha-anchor', 'aria-checked') == 'true'
-    except (TimeoutException, NoSuchElementException) as e:
-      console.error(f"Error checking the captcha: {e}")
-      return False
-    finally:
-      self.driver.switch_to.parent_frame()
+    time.sleep(1)
+    attribute_value = self._get_attribute('#recaptcha-anchor', 'aria-checked')
+    if attribute_value is not None and attribute_value == 'true':
+        self.driver.switch_to.parent_frame()
+        return True
+    else:
+        console.error("Error checking the captcha: Could not verify recaptcha state.")
+        self.driver.switch_to.parent_frame()
+        return False
 
   def _get_attribute(self, selector: str, attribute: str, type: str = None) -> str:
     try:

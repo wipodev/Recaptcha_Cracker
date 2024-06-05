@@ -5,9 +5,6 @@ dist
 __pycache__
 *.egg-info
 downloaded_files/
-*.wav
-*.mp3
-*.jpg
-*.jpeg
-*.png
-*.svg
+node_modules
+cache
+package-lock.json

@@ -1,6 +1,6 @@
 {
-  "name": "recaptcha_cracker",
-  "version": "0.2.0",
+  "name": "recaptcha_cracker_docs",
+  "version": "0.2.1",
   "description": "captcha_cracker - A complete Python package for solving various types of CAPTCHAs, including text CAPTCHAs, reCAPTCHAs, and more. Enhance your automation scripts with robust CAPTCHA resolution capabilities.",
   "scripts": {
     "dev": "vitepress dev docs --host",

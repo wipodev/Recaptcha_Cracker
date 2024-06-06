@@ -1,25 +1,24 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
   name: "Recaptcha Cracker"
-  text: "A VitePress Site"
-  tagline: My great project tagline
+  tagline: Simplify your web automation with reCAPTCHA v2 and text captcha solvers.
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Get Started
+      link: /guide/getting-started
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Reference
+      link: /guide/reference
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Solve reCAPTCHA v2
+    details: Automatically resolve reCAPTCHA v2 challenges using audio transcription integrated into your Selenium workflows.
+  - title: Solve Text Captchas
+    details: Effortlessly decode and resolve text captchas with EasyOCR and OpenCV processing.
+  - title: Easy Integration
+    details: Seamlessly integrate Recaptcha Cracker into your existing web automation scripts and workflows.
+  - title: Open Source
+    details: Available under the MIT license, allowing you to freely use and modify the tool for your needs.
 ---
-

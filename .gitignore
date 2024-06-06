@@ -6,5 +6,5 @@ __pycache__
 *.egg-info
 downloaded_files/
 node_modules
-cache
+docs/.vitepress/cache/
 package-lock.json

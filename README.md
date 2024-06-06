@@ -14,6 +14,7 @@ It allows you to solve "reCaptcha v2" captchas using audio transcription, making
 ## Features
 
 - Automated resolution of reCAPTCHA V2 captchas on web pages.
+- Automated resolution of text captchas on web pages.
 - Flexible configuration of the number of attempts to solve audio captchas.
 - Easy integration into web automation workflows.
 
@@ -23,10 +24,14 @@ It allows you to solve "reCaptcha v2" captchas using audio transcription, making
 - Seleniumbase
 - Pydub
 - SpeechRecognition
+- easyocr
+- requests
+- opencv
 - verbose-terminal
 
-If you're getting an error related to FFmpeg not being installed or in your PATH, get it here: https://ffmpeg.org/download.html
-If the error persists, make sure FFmpeg is properly installed for your OS and in your PATH.
+> [!IMPORTANT]
+> If you're getting an error related to FFmpeg not being installed or in your PATH, get it here: https://ffmpeg.org/download.html
+> If the error persists, make sure FFmpeg is properly installed for your OS and in your PATH.
 
 ## Installation
 
@@ -35,6 +40,8 @@ pip install recaptcha-cracker
 ```
 
 ## Usage
+
+### Resolving reCAPTCHA V2
 
 1. Import the necessary class to your Python script:
 
@@ -65,6 +72,41 @@ checked_status = recaptcha.cracker(selector='//*[@id="recaptcha-demo"]/div/div/i
 ```
 
 4. If the reCAPTCHA is successfully resolved, the method will return True. Otherwise, it will return False.
+
+### Resolving text captchas
+
+1. Import the necessary class to your Python script:
+
+```python
+from recaptcha_cracker import TextCaptcha
+```
+
+2. Initialize a TextCaptcha object:
+
+```python
+text_captcha = TextCaptcha(image_path='captcha.png', processing=True, kernel=(2, 2), verbose=True)
+```
+
+3. Use the `download_and_read_image` method to download and read a captcha image from a URL:
+
+```python
+captcha_text = text_captcha.download_and_read_image(url='https://example.com/captcha.png')
+```
+
+4. Use the `decode_and_read_image` method to decode and read a base64 encoded captcha image:
+
+```python
+base64_image = 'data:image/png;base64,...'
+captcha_text = text_captcha.decode_and_read_image(base64_image=base64_image)
+```
+
+5. Use the `capture_and_read_image` method to capture and read a captcha image from a web page element:
+
+```python
+captcha_text = text_captcha.capture_and_read_image(driver, element='//img[@id="captcha_image"]')
+```
+
+6. The methods return the decoded captcha text if successful, or None if there was an error.
 
 ## Contributions
 

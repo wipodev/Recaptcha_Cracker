@@ -20,3 +20,16 @@
 ### bugfixes
 
 - Fixed the infinite loop that occurred in the "get_audio_transcript" method
+
+## [0.2.0] - 2024-06-05
+
+### added
+
+- added TextCaptcha module.
+- added vitepress package.
+- added gh-pages package.
+- added tests for TextCaptcha module.
+
+### changed
+
+- modified recaptchav2 unit tests

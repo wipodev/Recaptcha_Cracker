@@ -84,7 +84,7 @@ from recaptcha_cracker import TextCaptcha
 2. Initialize a TextCaptcha object:
 
 ```python
-text_captcha = TextCaptcha(image_path='captcha.png', processing=True, kernel=(2, 2), verbose=True)
+text_captcha = TextCaptcha(image_path='captcha.png', session=None, processing=True, kernel=(2, 2), verbose=True)
 ```
 
 3. Use the `download_and_read_image` method to download and read a captcha image from a URL:

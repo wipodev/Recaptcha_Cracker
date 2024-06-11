@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='recaptcha-cracker',
-    version='0.2.0',
+    version='0.2.1',
     author='Wipodev',
     author_email='ajwipo@gmail.com',
     description='captcha_cracker - A complete Python package for solving various types of CAPTCHAs, including text CAPTCHAs, reCAPTCHAs, and more. Enhance your automation scripts with robust CAPTCHA resolution capabilities.',

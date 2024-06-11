@@ -8,15 +8,16 @@ import re
 
 class TextCaptcha:
 
-  def __init__(self, image_path: str = 'captcha.png', processing: bool = True, kernel: tuple = (2, 2), verbose: bool = True):
+  def __init__(self, image_path: str = 'captcha.png', session = None, processing: bool = True, kernel: tuple = (2, 2), verbose: bool = True):
     self.image_path = image_path
+    self.session = session or requests.session()
     self.processing = processing
     self._kernel = cv2.getStructuringElement(cv2.MORPH_RECT, kernel)
     self.verbose = verbose
 
   def download_and_read_image(self, url: str) -> Optional[str]:
       try:
-        response = requests.get(url)
+        response = self.session.get(url)
         with open(self.image_path, 'wb') as f:
             f.write(response.content)
         console.success(f"Image downloaded successfully: {self.image_path}", self.verbose)
